@@ -5,7 +5,7 @@ const smoochBot = require('smooch-bot');
 const MemoryStore = smoochBot.MemoryStore;
 const MemoryLock = smoochBot.MemoryLock;
 const Bot = smoochBot.Bot;
-const Script = smoochBot.Script;
+// const Script = smoochBot.Script;
 const StateMachine = smoochBot.StateMachine;
 
 var storage = require("node-persist");
