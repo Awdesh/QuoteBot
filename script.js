@@ -1,11 +1,37 @@
 'use strict';
 
 const Script = require('smooch-bot').Script;
+const smoochBot = require('smooch-bot');
+const MemoryStore = smoochBot.MemoryStore;
+const MemoryLock = smoochBot.MemoryLock;
+const Bot = smoochBot.Bot;
+const Script = smoochBot.Script;
+const StateMachine = smoochBot.StateMachine;
+
 var storage = require("node-persist");
 var getQuotesFromStorage = require('../helper.js');
 storage.initSync();
 
+class HerokuBot extends Bot {
+    constructor(options) {
+        super(options);
+    }
 
+    say(text) {
+        return new Promise((resolve) => {
+            console.log(text);
+            resolve();
+        });
+    }
+    
+    getQ() {
+        getQuotesFromStorage(function(quote){
+            console.log(quote);
+            return quote;
+        });
+    }
+   
+}
 
 module.exports = new Script({
     processing: {
@@ -19,16 +45,9 @@ module.exports = new Script({
                 .then(() => 'askName');
         }
     },
-    
-    getQ() {
-        getQuotesFromStorage(function(quote){
-            console.log(quote);
-            return quote;
-        });
-    },
-    
+
     getQuotes : {
-      prompt: (bot) => bot.say(bot.getQ()),
+      prompt: (bot) => bot.say(),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
@@ -54,4 +73,29 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
                 .then(() => 'finish');
         }
     }
+});
+
+
+const userId = 'testUserId';
+const store = new MemoryStore();
+const lock = new MemoryLock();
+const bot = new HerokuBot({
+    store,
+    lock,
+    userId
+});
+
+const stateMachine = new StateMachine({
+    bot,
+    userId
+});
+
+process.stdin.on('data', function(data) {
+    stateMachine.receiveMessage({
+        text: data.toString().trim()
+    })
+        .catch((err) => {
+            console.error(err);
+            console.error(err.stack);
+        });
 });
