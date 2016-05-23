@@ -1,3 +1,3 @@
 # FortuneCookie Bot 
 
-A fortune cookie bot that will tell fortune every day.
+A fortune cookie bot that will tell fortune every morning. 
