@@ -2,7 +2,10 @@
 
 const Script = require('smooch-bot').Script;
 var storage = require("node-persist");
+var getQuotesFromStorage = require('../helper.js');
 storage.initSync();
+
+
 
 module.exports = new Script({
     processing: {
@@ -15,6 +18,21 @@ module.exports = new Script({
             return bot.say('Hi! I\'m Smooch Bot!')
                 .then(() => 'askName');
         }
+    },
+    
+    getQ() {
+        getQuotesFromStorage(function(quote){
+            console.log(quote);
+            return quote;
+        });
+    },
+    
+    getQuotes : {
+      prompt: (bot) => bot.say(bot.getQ()),
+      receive: (bot) => {
+          return bot.say('Have a good day')
+            .then(() => 'finish');
+      }
     },
 
     askName: {
