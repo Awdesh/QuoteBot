@@ -9,7 +9,7 @@ const Bot = smoochBot.Bot;
 const StateMachine = smoochBot.StateMachine;
 
 var storage = require("node-persist");
-var getQuotesFromStorage = require('../helper.js');
+var getQuotesFromStorage = require('./helper.js');
 storage.initSync();
 
 class HerokuBot extends Bot {
