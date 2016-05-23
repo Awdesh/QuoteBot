@@ -30,7 +30,6 @@ class HerokuBot extends Bot {
             return quote;
         });
     }
-   
 }
 
 module.exports = new Script({
