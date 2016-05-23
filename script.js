@@ -13,7 +13,7 @@ module.exports = new Script({
     start: {
         receive: (bot) => {
             return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'getQuotes');
+                .then(() => 'askName');
         }
     },
 
@@ -24,7 +24,7 @@ module.exports = new Script({
             return bot.setProp('name', name)
                 .then(() => bot.say(`Great! I'll call you ${name}
 Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
-                .then(() => 'getQuotes');
+                .then(() => 'finish');
         }
     },
     
