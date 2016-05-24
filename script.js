@@ -1,10 +1,24 @@
 'use strict';
 
 const Script = require('smooch-bot').Script;
+const smoochBot = require('smooch-bot');
 var storage = require("node-persist");
 var getQuotesFromStorage = require('./helper.js');
+const Bot = smoochBot.Bot;
 storage.initSync();
 
+Class HerokuBot extends Bot {
+    constructor(options) {
+        super(options);
+    }
+    
+    function getQuotes(){
+        getQuotesFromStorage(function(quote){
+            console.log(quote);
+            return 'demo';
+        });
+    }    
+}
 function getQuotes(){
         getQuotesFromStorage(function(quote){
             console.log(quote);
@@ -26,7 +40,7 @@ module.exports = new Script({
     },
 
     getQuotes1 : {
-      prompt: (bot) => bot.say('lala'),
+      prompt: (bot) => bot.say(bot.getQuotes()),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
