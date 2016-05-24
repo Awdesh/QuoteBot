@@ -4,32 +4,10 @@ const Script = require('smooch-bot').Script;
 const smoochBot = require('smooch-bot');
 var storage = require("node-persist");
 var getQuotesFromStorage = require('./helper.js');
-const Bot = smoochBot.Bot;
 const MemoryStore = smoochBot.MemoryStore;
 const MemoryLock = smoochBot.MemoryLock;
 
 storage.initSync();
-
-class HerokuBot1 extends Bot {
-    constructor(options) {
-        super(options);
-    }
-    
-    say(text) {
-        return new Promise((resolve) => {
-            console.log(text);
-            resolve();
-        });
-    }
-    
-    getQ() {
-        getQuotesFromStorage(function(quote){
-            console.log(quote);
-            return 'demo';
-        });
-    }    
-}
-
 
 module.exports = new Script({
     processing: {
@@ -49,10 +27,7 @@ module.exports = new Script({
           console.log(quote);
           bot.say(quote);
       }),
-      receive: (bot) => {
-          return bot.say('Have a good day')
-            .then(() => 'finish');
-      }
+      receive: () => 'Have a good day'
     },
 
     askName: {
@@ -74,13 +49,4 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
                 .then(() => 'finish');
         }
     }
-});
-
-const userId = 'testUserId';
-const store = new MemoryStore();
-const lock = new MemoryLock();
-const bot = new HerokuBot1({
-    store,
-    lock,
-    userId
 });
