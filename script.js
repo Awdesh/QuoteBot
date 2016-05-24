@@ -40,12 +40,15 @@ module.exports = new Script({
     start: {
         receive: (bot) => {
             return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'getQuotes1');
+                .then(() => 'getQuotes');
         }
     },
 
-    getQuotes1 : {
-      prompt: (bot) => bot.say(bot.getQ()),
+    getQuotes : {
+      prompt: (bot) => getQuotesFromStorage(function(quote) {
+          console.log(quote);
+          bot.say(quote);
+      }),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
