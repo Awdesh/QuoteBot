@@ -5,6 +5,9 @@ const smoochBot = require('smooch-bot');
 var storage = require("node-persist");
 var getQuotesFromStorage = require('./helper.js');
 const Bot = smoochBot.Bot;
+const MemoryStore = smoochBot.MemoryStore;
+const MemoryLock = smoochBot.MemoryLock;
+
 storage.initSync();
 
 class HerokuBot1 extends Bot {
@@ -68,3 +71,11 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
     }
 });
 
+const userId = 'testUserId';
+const store = new MemoryStore();
+const lock = new MemoryLock();
+const bot = new HerokuBot1({
+    store,
+    lock,
+    userId
+});
