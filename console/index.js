@@ -50,7 +50,10 @@ const script = new Script({
     },
     
     getQuotes : {
-      prompt: (bot) => bot.say(bot.getQ()),
+      prompt: (bot) => getQuotesFromStorage(function(quote) {
+          console.log(quote);
+          bot.say(quote);
+      }),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
