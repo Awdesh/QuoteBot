@@ -2,35 +2,35 @@
 
 const Script = require('smooch-bot').Script;
 const smoochBot = require('smooch-bot');
-const MemoryStore = smoochBot.MemoryStore;
-const MemoryLock = smoochBot.MemoryLock;
-const Bot = smoochBot.Bot;
-// const Script = smoochBot.Script;
-const StateMachine = smoochBot.StateMachine;
+// const MemoryStore = smoochBot.MemoryStore;
+// const MemoryLock = smoochBot.MemoryLock;
+// const Bot = smoochBot.Bot;
+// // const Script = smoochBot.Script;
+// const StateMachine = smoochBot.StateMachine;
 
 var storage = require("node-persist");
 var getQuotesFromStorage = require('./helper.js');
 storage.initSync();
 
-class HerokuBot extends Bot {
-    constructor(options) {
-        super(options);
-    }
+// class HerokuBot extends Bot {
+//     constructor(options) {
+//         super(options);
+//     }
 
-    say(text) {
-        return new Promise((resolve) => {
-            console.log(text);
-            resolve();
-        });
-    }
+//     say(text) {
+//         return new Promise((resolve) => {
+//             console.log(text);
+//             resolve();
+//         });
+//     }
     
-    getQ() {
-        getQuotesFromStorage(function(quote){
-            console.log(quote);
-            return quote;
-        });
-    }
-}
+//     getQ() {
+//         getQuotesFromStorage(function(quote){
+//             console.log(quote);
+//             return quote;
+//         });
+//     }
+// }
 
 module.exports = new Script({
     processing: {
@@ -74,27 +74,3 @@ Is that OK? %[Yes](postback:yes) %[No](postback:no)`))
     }
 });
 
-
-const userId = 'testUserId';
-const store = new MemoryStore();
-const lock = new MemoryLock();
-const bot = new HerokuBot({
-    store,
-    lock,
-    userId
-});
-
-const stateMachine = new StateMachine({
-    bot,
-    userId
-});
-
-process.stdin.on('data', function(data) {
-    stateMachine.receiveMessage({
-        text: data.toString().trim()
-    })
-        .catch((err) => {
-            console.error(err);
-            console.error(err.stack);
-        });
-});
