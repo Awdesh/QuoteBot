@@ -15,6 +15,13 @@ class HerokuBot1 extends Bot {
         super(options);
     }
     
+    say(text) {
+        return new Promise((resolve) => {
+            console.log(text);
+            resolve();
+        });
+    }
+    
     getQuotes() {
         getQuotesFromStorage(function(quote){
             console.log(quote);
