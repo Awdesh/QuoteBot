@@ -34,7 +34,7 @@ storage.initSync();
 function getQuotes(){
         getQuotesFromStorage(function(quote){
             console.log(quote);
-            return quote;
+            return 'demo';
         });
 }
 
