@@ -15,19 +15,14 @@ class HerokuBot1 extends Bot {
         super(options);
     }
     
-    getQuotes(){
+    getQuotes() {
         getQuotesFromStorage(function(quote){
             console.log(quote);
             return 'demo';
         });
     }    
 }
-function getQuotes(){
-        getQuotesFromStorage(function(quote){
-            console.log(quote);
-            return 'demo';
-        });
-}
+
 
 module.exports = new Script({
     processing: {
