@@ -22,7 +22,7 @@ class HerokuBot1 extends Bot {
         });
     }
     
-    getQuotes() {
+    getQ() {
         getQuotesFromStorage(function(quote){
             console.log(quote);
             return 'demo';
@@ -45,7 +45,7 @@ module.exports = new Script({
     },
 
     getQuotes1 : {
-      prompt: (bot) => bot.say(bot.getQuotes()),
+      prompt: (bot) => bot.say(bot.getQ()),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
