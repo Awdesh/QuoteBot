@@ -52,7 +52,7 @@ module.exports = new Script({
     },
 
     getQuotes1 : {
-      prompt: (bot) => bot.say(getQuotes().toString()),
+      prompt: (bot) => bot.say(getQuotes()),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');
