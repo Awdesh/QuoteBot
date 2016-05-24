@@ -7,12 +7,12 @@ var getQuotesFromStorage = require('./helper.js');
 const Bot = smoochBot.Bot;
 storage.initSync();
 
-Class HerokuBot extends Bot {
+class HerokuBot1 extends Bot {
     constructor(options) {
         super(options);
     }
     
-    function getQuotes(){
+    getQuotes(){
         getQuotesFromStorage(function(quote){
             console.log(quote);
             return 'demo';
