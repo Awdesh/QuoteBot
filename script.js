@@ -1,7 +1,6 @@
 'use strict';
 
 const Script = require('smooch-bot').Script;
-const smoochBot = require('smooch-bot');
 // const MemoryStore = smoochBot.MemoryStore;
 // const MemoryLock = smoochBot.MemoryLock;
 // const Bot = smoochBot.Bot;
@@ -32,6 +31,13 @@ storage.initSync();
 //     }
 // }
 
+function getQuotes(){
+        getQuotesFromStorage(function(quote){
+            console.log(quote);
+            return quote;
+        });
+}
+
 module.exports = new Script({
     processing: {
         prompt: (bot) => bot.say('Beep boop...'),
@@ -41,12 +47,12 @@ module.exports = new Script({
     start: {
         receive: (bot) => {
             return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'askName');
+                .then(() => 'getQuotes1');
         }
     },
 
-    getQuotes : {
-      prompt: (bot) => bot.say(),
+    getQuotes1 : {
+      prompt: (bot) => bot.say(getQuotes()),
       receive: (bot) => {
           return bot.say('Have a good day')
             .then(() => 'finish');

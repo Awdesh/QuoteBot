@@ -19,7 +19,7 @@ module.exports = function(callback){
     
     var day = getTodayDate();
     
-    switch(day){
+        switch(day){
         case 1:
             callback(quotes.day1);
             break;
