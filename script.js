@@ -17,7 +17,7 @@ module.exports = new Script({
 
     start: {
         receive: (bot) => {
-            return bot.say('Hi! I\'m Smooch Bot!')
+            return bot.say('Good Morning..')
                 .then(() => 'getQuotes');
         }
     },
@@ -27,7 +27,7 @@ module.exports = new Script({
           console.log(quote);
           bot.say(quote);
       }),
-      receive: () => 'Have a good day'
+      receive: () => 'Have a good day today.. Bye'
     },
 
     askName: {
